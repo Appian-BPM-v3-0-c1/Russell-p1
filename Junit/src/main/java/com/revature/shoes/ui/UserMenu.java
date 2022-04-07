@@ -1,5 +1,6 @@
 package com.revature.shoes.ui;
 
+import com.revature.shoes.daos.UserDAO;
 import com.revature.shoes.models.User;
 import com.revature.shoes.services.UserService;
 
@@ -29,7 +30,8 @@ public class UserMenu implements Imenu {
 
             switch(input) {
                 case '1':
-                new LoginMenu(new UserService()).start();
+                    UserDAO UserDAO = new UserDAO();
+                    new LoginMenu(new UserService(UserDAO)).start();
                     break;
                 case '2':
                     createUser();

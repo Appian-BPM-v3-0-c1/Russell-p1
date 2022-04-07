@@ -3,7 +3,7 @@ package com.revature.shoes.services;
 import com.revature.shoes.daos.UserDAO;
 
 public class UserService {
-    public final UserDAO userDao;
+    private final UserDAO userDao;
 
     public UserService(UserDAO userDAO){
         this.userDao = userDAO;
