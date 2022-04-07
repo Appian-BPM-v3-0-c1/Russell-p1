@@ -1,8 +1,14 @@
 package com.revature.shoes.ui;
 
+import com.revature.shoes.services.UserService;
+
 import java.util.Scanner;
 
 public class MainMenu implements Imenu {
+    public MainMenu(UserService userService) {
+
+    }
+
     @Override
     public void start() {
         char input = ' ';

@@ -1,6 +1,7 @@
 package com.revature.shoes.ui;
 
 import com.revature.shoes.models.User;
+import com.revature.shoes.services.UserService;
 
 import javax.swing.plaf.synth.SynthOptionPaneUI;
 import java.util.Scanner;
@@ -28,7 +29,7 @@ public class UserMenu implements Imenu {
 
             switch(input) {
                 case '1':
-
+                new LoginMenu(new UserService()).start();
                     break;
                 case '2':
                     createUser();
