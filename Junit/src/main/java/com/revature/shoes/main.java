@@ -11,8 +11,8 @@ import java.util.Scanner;
 
 public class main {
     public static void main(String[] args) {
-        UserDAO UserDAO = new UserDAO();
-        new MainMenu(new UserService(UserDAO)).start();
+
+        new MainMenu(new UserService(new UserDAO())).start();
 
 
     }
