@@ -61,7 +61,7 @@ public class UserMenu implements Imenu {
         while (!exit) {
             System.out.println("\nGetting Ready to Create New User......");
             System.out.println("Enter User ID");
-            user_1.getId(sc1.nextInt());
+            user_1.setId(sc1.nextInt());
 
             System.out.println("\nEnter your first name");
             user_1.setFirstName(sc1.next());
@@ -75,8 +75,6 @@ public class UserMenu implements Imenu {
             System.out.println("Enter your Zip Code");
             user_1.setZipCode(sc1.nextInt());
 
-            System.out.println("Enter your Shoe Size");
-            user_1.setShoeSize(sc1.nextInt());
 
             System.out.println("Enter your Favorite Brand");
             user_1.setFavBrand(sc1.next());

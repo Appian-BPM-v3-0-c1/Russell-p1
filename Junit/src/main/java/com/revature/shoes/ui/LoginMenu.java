@@ -2,6 +2,7 @@ package com.revature.shoes.ui;
 
 
 
+import com.revature.shoes.models.User;
 import com.revature.shoes.services.UserService;
 
 import java.util.Scanner;
@@ -14,6 +15,7 @@ public class LoginMenu implements Imenu {
     }
 
     Scanner sc = new Scanner(System.in);
+    User user = new User();
 
     @Override
     public void start() {
@@ -49,19 +51,87 @@ public class LoginMenu implements Imenu {
         }
     }
     private void createAccount() {
-        String username = " ";
+        String userName = " ";
         String password = " ";
+        String password2 = " ";
+        String firstName = " ";
+        String lastName = " ";
+        String email = " ";
+        int zipCode = 0;
+        int shoeSize = 0;
+        String favBrand = " ";
 
-
+        boolean userOk = false;
+        char input = ' ';
 
         System.out.println("\nCreating account... ");
 
         while (true) {
-            System.out.print("\nEnter new UserName");
+            while (true) {
+                System.out.print("\nEnter new UserName");
 
-            username = sc.next();
+                userName = sc.next();
 
-            System.out.println(userService.isValidUsername(username));
+                if (!userService.isDuplicate(userName)) {
+                    if (userService.isValidUsername(userName)) {
+                        user.setUserName(userName);
+
+                        break;
+                    } else {
+                        System.out.println("Invalid Username!!");
+                    }
+
+                } else {
+                    System.out.println("Duplicate Username!!!");
+                }
+
+            }
+
+
+            while (true) {
+                System.out.print("\nEnter in password: ");
+                password = sc.next();
+
+                System.out.print("\nEnter in password again: ");
+                password2 = sc.next();
+
+                if (password.equals(password2)) {
+                    if (userService.isValidPassword(password)) {
+                        user.setPassword(password);
+                        break;
+                    } else {
+                        System.out.println("\nInvalid password!");
+                    }
+                } else {
+                    System.out.println("Password does not match!");
+                }
+            }
+            while (true) {
+                System.out.println("\nNeed your personal information......");
+                System.out.println("Enter User ID");
+                user.setId(sc.nextInt());
+
+                System.out.println("\nEnter your first name");
+                user.setFirstName(sc.next());
+
+                System.out.println("Enter you last name");
+                user.setLastName(sc.next());
+
+                System.out.println("Enter your email");
+                user.setEmail(sc.next());
+
+                System.out.println("Enter your Zip Code");
+                user.setZipCode(sc.nextInt());
+
+                System.out.println("Enter your Favorite Brand");
+                user.setFavBrand(sc.next());
+
+
+                System.out.println(user);
+            }
+
+
+            }
         }
+
     }
-}

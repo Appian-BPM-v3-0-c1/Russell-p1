@@ -9,11 +9,12 @@ public class User {
     private int shoeSize;
     private String favBrand;
     private String userName;
+    private String password;
 
     public User() {
     }
 
-    public User(int id, String firstName, String lastName, String email, int zipCode, int shoeSize, String favBrand, String userName) {
+    public User(int id, String firstName, String lastName, String email, int zipCode, int shoeSize, String favBrand, String userName, String password) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -22,9 +23,10 @@ public class User {
         this.shoeSize = shoeSize;
         this.favBrand = favBrand;
         this.userName = userName;
+        this.password = password;
     }
 
-    public int getId(int i) {
+    public int getId() {
         return id;
     }
 
@@ -32,7 +34,7 @@ public class User {
         this.id = id;
     }
 
-    public String getFirstName(String next) {
+    public String getFirstName() {
         return firstName;
     }
 
@@ -40,7 +42,7 @@ public class User {
         this.firstName = firstName;
     }
 
-    public String getLastName(String next) {
+    public String getLastName() {
         return lastName;
     }
 
@@ -48,7 +50,7 @@ public class User {
         this.lastName = lastName;
     }
 
-    public String getEmail(String next) {
+    public String getEmail() {
         return email;
     }
 
@@ -86,5 +88,13 @@ public class User {
 
     public void setUserName(String userName) {
         this.userName = userName;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

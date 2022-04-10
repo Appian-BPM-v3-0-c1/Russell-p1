@@ -14,6 +14,5 @@ public class main {
 
         new MainMenu(new UserService(new UserDAO())).start();
 
-
     }
 }
