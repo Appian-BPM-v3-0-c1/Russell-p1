@@ -128,10 +128,31 @@ public class LoginMenu implements Imenu {
 
 
                 System.out.println(user);
+
+                System.out.println("\nIs your information correct??");
+
+                if(sc.next().charAt(0) == 'y') {
+                    System.out.println("\nPlease confirm credentials (y/n) ");
+                    System.out.print("Username: " + userName);
+                    System.out.print("\nPassword: " + password);
+
+                    System.out.print("\nEnter: ");
+
+                    if(sc.next().charAt(0) == 'y') {
+                        userService.getUserDao().save(user);
+
+                        System.out.println("User created successfully");
+                        break;
+                    } else {
+                        createAccount();
+                    }
+                } else {
+                    createAccount();
+                }
             }
 
 
-            }
+
         }
 
-    }
+    }}
