@@ -1,5 +1,7 @@
 package com.revature.shoes.ui;
 
+import com.revature.shoes.services.ShoeService;
+
 import java.util.Scanner;
 
 public class OrderMenu implements Imenu {
@@ -31,7 +33,8 @@ public class OrderMenu implements Imenu {
                 case '3':
                     break;
                 case '4':
-                    new ShoeMenu().start();
+                    ShoeService shoeService = null;
+                    new ShoeMenu(shoeService).start();
                     break;
                 case '5':
                     done = true;

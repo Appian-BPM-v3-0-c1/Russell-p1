@@ -1,13 +1,17 @@
 package com.revature.shoes.daos;
 
+import com.revature.shoes.models.Shoe;
+
 import java.util.List;
 
 public interface CrudDAO <T> {
-    T save(T obj);
+    void save(T obj);
 
     List<T> findAll();
 
-    T findByID(String id);
+    T findByID(int id);
+
+    Shoe findByID(String id);
 
     boolean update(T updateObj);
 

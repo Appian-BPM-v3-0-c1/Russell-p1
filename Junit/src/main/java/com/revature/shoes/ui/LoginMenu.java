@@ -35,6 +35,7 @@ public class LoginMenu implements Imenu {
 
             switch (input) {
                 case '1':
+                    login();
                     break;
                 case '2':
                     createAccount();
@@ -108,9 +109,7 @@ public class LoginMenu implements Imenu {
             }
             while (true) {
                 System.out.println("\nNeed your personal information......");
-                System.out.println("Enter User ID");
-                user.setId(sc.nextInt());
-
+                
                 System.out.println("\nEnter your first name");
                 user.setFirstName(sc.next());
 
@@ -147,7 +146,7 @@ public class LoginMenu implements Imenu {
                         createAccount();
                     }
                 } else {
-                    createAccount();
+                    new OrderMenu().start();
                 }
             }
 
@@ -155,4 +154,22 @@ public class LoginMenu implements Imenu {
 
         }
 
-    }}
+    }
+    private void login() {
+        while(true) {
+            System.out.println("\nUsername: ");
+            user.setUserName(sc.next());
+
+            System.out.println("\nPassword: ");
+            user.setPassword(sc.next());
+
+            if (userService.isValidLogin(user)) {
+                user.setId(userService.getUserDao().getId(user.getUserName()));
+                new MainMenu(userService).start();
+                break;
+            } else {
+                System.out.println("\nLogin Not Accepted");
+            }
+        }
+    }
+}

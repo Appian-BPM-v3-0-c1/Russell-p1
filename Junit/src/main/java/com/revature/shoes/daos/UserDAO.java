@@ -2,6 +2,7 @@ package com.revature.shoes.daos;
 
 
 import com.revature.shoes.connection.DatabaseConnection;
+import com.revature.shoes.models.Shoe;
 import com.revature.shoes.models.User;
 
 import java.sql.Connection;
@@ -15,28 +16,23 @@ public class UserDAO implements CrudDAO<User>{
     Connection con = DatabaseConnection.getCon();
 
     @Override
-    public User save(User obj) {
-        User User = null;
-        int n = 0;
-
+    public void save(User obj) {
         try {
-            PreparedStatement ps = con.prepareStatement("INSERT INTO user (user_id, user_name, password, " +
-                    "firstName, lastName, email, zipCode, fav_Brand )  VALUES");
-            ps.setInt(1, obj.getId());
-            ps.setString(2, obj.getUserName());
-            ps.setString(3, obj.getPassword());
-            ps.setString(4, obj.getFirstName());
+            PreparedStatement ps = con.prepareStatement("INSERT INTO users ( user_name, password, " +
+                    "firstName, lastName, email, zipCode, fav_Brand )  VALUES (?,?,?,?,?,?,?)");
+
+            ps.setString(1, obj.getUserName());
+            ps.setString(2, obj.getPassword());
+            ps.setString(3, obj.getFirstName());
             ps.setString(4, obj.getLastName());
             ps.setString(5, obj.getEmail());
             ps.setInt(6, obj.getZipCode());
             ps.setString(7, obj.getFavBrand());
-            n = ps.executeUpdate();
+            ps.executeUpdate();
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-        return null;
     }
 
 
@@ -47,7 +43,7 @@ public class UserDAO implements CrudDAO<User>{
         List<User> userList = new ArrayList<>();
 
         try {
-            PreparedStatement ps = con.prepareStatement("SELECT * FROM user");
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM users");
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
@@ -72,7 +68,12 @@ public class UserDAO implements CrudDAO<User>{
     }
 
     @Override
-    public User findByID(String id) {
+    public User findByID(int id) {
+        return null;
+    }
+
+    @Override
+    public Shoe findByID(String id) {
         return null;
     }
 
@@ -90,7 +91,7 @@ public class UserDAO implements CrudDAO<User>{
         List<String> username_list = new ArrayList<>();
 
       try {
-          PreparedStatement ps = con.prepareStatement("SELECT (user_name) FROM user");
+          PreparedStatement ps = con.prepareStatement("SELECT (user_name) FROM users");
           ResultSet rs = ps.executeQuery();
 
           while (rs.next()) {
@@ -101,5 +102,9 @@ public class UserDAO implements CrudDAO<User>{
       }
 
       return username_list;
+    }
+
+    public int getId(String userName) {
+        return 0;
     }
 }

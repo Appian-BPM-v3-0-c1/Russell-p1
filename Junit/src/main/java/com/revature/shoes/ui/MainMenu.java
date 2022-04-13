@@ -1,12 +1,14 @@
 package com.revature.shoes.ui;
 
+import com.revature.shoes.daos.ShoeDAO;
+import com.revature.shoes.services.ShoeService;
 import com.revature.shoes.services.UserService;
 
 import java.util.Scanner;
 
 public class MainMenu implements Imenu {
-    public MainMenu(UserService userService) {
 
+    public MainMenu(UserService userService) {
     }
 
     @Override
@@ -30,12 +32,14 @@ public class MainMenu implements Imenu {
 
             switch(input) {
                 case '1':
-                    new ShoeMenu().start();
+                    ShoeDAO ShoeDAO = new ShoeDAO();
+                    new ShoeMenu(new ShoeService(ShoeDAO)).start();
                     break;
                 case '2':
                     break;
                 case '3':
-                    new UserMenu().start();
+                    ShoeService shoeService = null;
+                    new UserMenu(shoeService).start();
                     break;
                 case '4':
                     new OrderMenu().start();

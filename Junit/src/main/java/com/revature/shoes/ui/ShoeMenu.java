@@ -1,10 +1,17 @@
 package com.revature.shoes.ui;
 
-import java.sql.SQLOutput;
+import com.revature.shoes.models.Shoe;
+import com.revature.shoes.models.User;
+import com.revature.shoes.services.ShoeService;
+
+import java.util.List;
 import java.util.Scanner;
 
 public class ShoeMenu implements Imenu {
 
+
+    public ShoeMenu(ShoeService shoeService) {
+    }
 
     @Override
     public void start() {
@@ -27,7 +34,6 @@ public class ShoeMenu implements Imenu {
 
             switch(input) {
                 case '1':
-                    new ShoeMenu().start();
                     break;
                 case '2':
                     break;
@@ -44,9 +50,4 @@ public class ShoeMenu implements Imenu {
             }
         }
     }
-
-    private void createShoe() {
-        System.out.println("\nCreating Shoe...");
-    }
 }
-

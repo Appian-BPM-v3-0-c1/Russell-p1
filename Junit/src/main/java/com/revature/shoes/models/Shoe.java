@@ -90,15 +90,13 @@ public class Shoe {
 
     @Override
     public String toString() {
-        return "Shoe{" +
-                "id=" + id +
+        return "" +
                 ", brand='" + brand + '\'' +
                 ", name='" + name + '\'' +
                 ", type='" + type + '\'' +
                 ", size=" + size +
                 ", color='" + color + '\'' +
                 ", qty=" + qty +
-                ", price=" + price +
-                '}';
+                ", price=" + price;
     }
 }
