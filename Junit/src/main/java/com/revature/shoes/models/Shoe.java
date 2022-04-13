@@ -91,12 +91,12 @@ public class Shoe {
     @Override
     public String toString() {
         return "" +
-                ", brand='" + brand + '\'' +
-                ", name='" + name + '\'' +
-                ", type='" + type + '\'' +
-                ", size=" + size +
-                ", color='" + color + '\'' +
-                ", qty=" + qty +
-                ", price=" + price;
+                " brand='" + brand + '\'' +
+                " name='" + name + '\'' +
+                " type='" + type + '\'' +
+                " size=" + size +
+                " color='" + color + '\'' +
+                " qty=" + qty +
+                " price=" + price;
     }
 }

@@ -3,7 +3,7 @@ package com.revature.shoes.ui;
 import com.revature.shoes.models.Shoe;
 import com.revature.shoes.models.User;
 import com.revature.shoes.services.ShoeService;
-
+import com.revature.shoes.daos.ShoeDAO;
 import java.util.List;
 import java.util.Locale;
 import java.util.Scanner;
@@ -41,6 +41,7 @@ public class ShoeMenu implements Imenu {
                     searchByBrand();
                     break;
                 case '2':
+                    //searchByID();
                     break;
                 case '3':
                     break;
@@ -74,4 +75,23 @@ public class ShoeMenu implements Imenu {
             }
         }
     }
+
+    /*public void searchByID() {
+        int id = 0;
+        Scanner sc = new Scanner(System.in);
+
+        while(true) {
+            System.out.println("\nSearch by ID:  ");
+            id = sc.nextInt();
+
+            List<Shoe> shoes = shoeService.getShoeDao().findByID(id);
+            if(shoes.isEmpty()) {
+                System.out.println("\nInvalid Size");
+            } else {
+                for (Shoe sh : shoes) {
+                    System.out.println(sh);
+                }
+            }
+        }
+    }*/
 }

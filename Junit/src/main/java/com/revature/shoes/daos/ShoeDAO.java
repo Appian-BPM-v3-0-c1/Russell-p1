@@ -117,4 +117,33 @@ public class ShoeDAO implements CrudDAO<Shoe>{
         }
         return shoes;
     }
-}
+
+    public List<Shoe> findBySize(int size) {
+       List<Shoe> shoes = new ArrayList<>();
+
+       try {
+           PreparedStatement ps = con.prepareStatement("SELECT * FROM shoes where shoe_size LIKE ?");
+           ps.setString(1, "%" + "%");
+           ResultSet rs = ps.executeQuery();
+           while(rs.next()) {
+               Shoe shoe = new Shoe();
+
+
+               shoe.setBrand(rs.getString("shoe_brand"));
+               shoe.setName(rs.getString("shoe_name"));
+               shoe.setType(rs.getString("shoe_type"));
+               shoe.setSize(rs.getInt("shoe_size"));
+               shoe.setColor(rs.getString("color"));
+               shoe.setQty(rs.getInt("shoe_inventory"));
+               shoe.setPrice(rs.getDouble("price"));
+
+               shoes.add(shoe);
+           }
+       } catch (SQLException e){
+           e.printStackTrace();
+       }
+
+        return shoes;
+       }
+    }
+

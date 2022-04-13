@@ -1,7 +1,9 @@
 package com.revature.shoes.ui;
 
+import com.revature.shoes.models.Cart;
 import com.revature.shoes.services.ShoeService;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class OrderMenu implements Imenu {
@@ -26,7 +28,7 @@ public class OrderMenu implements Imenu {
 
             switch(input) {
                 case '1':
-
+                    viewCart();
                     break;
                 case '2':
                     break;
@@ -42,6 +44,15 @@ public class OrderMenu implements Imenu {
                 default:
                     System.out.println("Incorrect entry, please try again");
             }
+        }
+    }
+
+    private void checkOut(List<Cart> cartList) {
+        int input = 0;
+        boolean cart = false;
+
+        while(!cart) {
+            System.out.println("What Shoes would you like...enter ");
         }
     }
 }
