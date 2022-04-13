@@ -36,10 +36,11 @@ public class MainMenu implements Imenu {
                     new ShoeMenu(new ShoeService(ShoeDAO)).start();
                     break;
                 case '2':
+                    new ShoeDAO().findAllShoes();
                     break;
                 case '3':
                     ShoeService shoeService = null;
-                    new UserMenu(shoeService).start();
+                    new AdminMenu(shoeService).start();
                     break;
                 case '4':
                     new OrderMenu().start();

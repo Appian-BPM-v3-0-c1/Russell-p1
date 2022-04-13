@@ -5,12 +5,16 @@ import com.revature.shoes.models.User;
 import com.revature.shoes.services.ShoeService;
 
 import java.util.List;
+import java.util.Locale;
 import java.util.Scanner;
 
 public class ShoeMenu implements Imenu {
+    private final ShoeService shoeService;
 
 
     public ShoeMenu(ShoeService shoeService) {
+        this.shoeService = shoeService;
+
     }
 
     @Override
@@ -34,6 +38,7 @@ public class ShoeMenu implements Imenu {
 
             switch(input) {
                 case '1':
+                    searchByBrand();
                     break;
                 case '2':
                     break;
@@ -47,6 +52,25 @@ public class ShoeMenu implements Imenu {
                     break;
                 default:
                     System.out.println("Incorrect entry, please try again");
+            }
+        }
+    }
+    public void searchByBrand() {
+        String brand = " ";
+        Scanner sc = new Scanner(System.in);
+
+        while (true) {
+            System.out.println("\nSearch by Brand:  ");
+            brand = sc.nextLine().toLowerCase();
+
+            List<Shoe> shoes = shoeService.getShoeDAO().findByBrand(brand);
+
+            if (shoes.isEmpty()) {
+                System.out.println("\nInvalid Brand");
+            } else {
+                for (Shoe sh : shoes) {
+                    System.out.println(sh);
+                }
             }
         }
     }

@@ -3,6 +3,7 @@ package com.revature.shoes.ui;
 import com.revature.shoes.daos.ShoeDAO;
 import com.revature.shoes.daos.UserDAO;
 import com.revature.shoes.models.Shoe;
+import com.revature.shoes.models.User;
 import com.revature.shoes.services.ShoeService;
 import com.revature.shoes.services.UserService;
 
@@ -10,10 +11,13 @@ import java.util.Scanner;
 
 public class AdminMenu implements Imenu {
     private final ShoeService shoeService;
+
     Shoe shoe = new Shoe();
 
     public AdminMenu(ShoeService shoeService) {
+
         this.shoeService = shoeService;
+
     }
 
 
@@ -79,7 +83,16 @@ public class AdminMenu implements Imenu {
 
             System.out.println("What is the Name of the Shoe?");
             shoe.setName(sc1.nextLine());
+            if (!shoeService.isDuplicate(shoe_name)) {
+                System.out.println("Invalid Shoe Name!!");
+                break;
+            } else {
+                continue;
+            }
 
+
+        }
+        while (true){
             System.out.println("What is the Type of Shoe");
             shoe.setType(sc1.nextLine());
 

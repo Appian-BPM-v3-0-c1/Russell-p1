@@ -7,7 +7,7 @@ import com.revature.shoes.models.Shoe;
 import java.util.List;
 
 public class ShoeService {
-    private final ShoeDAO shoeDAO;
+    ShoeDAO shoeDAO = new ShoeDAO();
 
     public ShoeService(ShoeDAO shoeDAO) {
         this.shoeDAO = shoeDAO;
@@ -28,8 +28,8 @@ public class ShoeService {
         return false;
     }
 
+
     public CrudDAO<Shoe> getShoeDao() {
-        CrudDAO<Shoe> ShoeDAO = null;
-        return ShoeDAO;
+        return null;
     }
 }

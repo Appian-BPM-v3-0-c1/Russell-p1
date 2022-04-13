@@ -91,15 +91,30 @@ public class ShoeDAO implements CrudDAO<Shoe>{
         return shoe_name_list;
     }
 
-    public List<String> findByBrand() {
-        List<String> shoe_brand_list = new ArrayList<>();
+    public List<Shoe> findByBrand(String brand) {
+        List<Shoe> shoes = new ArrayList<>();
 
         try {
-            PreparedStatement ps = con.prepareStatement(("SELECT (shoe_brand FROM shoes"));
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM shoes where shoe_brand LIKE ?");
+            ps.setString(1, "%" + "%");
             ResultSet rs = ps.executeQuery();
+            while(rs.next()) {
+                Shoe shoe = new Shoe();
+
+
+                shoe.setBrand(rs.getString("shoe_brand"));
+                shoe.setName(rs.getString("shoe_name"));
+                shoe.setType(rs.getString("shoe_type"));
+                shoe.setSize(rs.getInt("shoe_size"));
+                shoe.setColor(rs.getString("color"));
+                shoe.setQty(rs.getInt("shoe_inventory"));
+                shoe.setPrice(rs.getDouble("price"));
+
+                shoes.add(shoe);
+            }
         } catch (SQLException e){
             e.printStackTrace();
         }
-        return shoe_brand_list;
+        return shoes;
     }
 }
