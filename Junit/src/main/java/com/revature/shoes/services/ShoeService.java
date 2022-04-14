@@ -7,13 +7,13 @@ import com.revature.shoes.models.Shoe;
 import java.util.List;
 
 public class ShoeService {
-    ShoeDAO shoeDAO = new ShoeDAO();
+    static ShoeDAO shoeDAO = new ShoeDAO();
 
     public ShoeService(ShoeDAO shoeDAO) {
         this.shoeDAO = shoeDAO;
     }
 
-    public ShoeDAO getShoeDAO() {
+    public static ShoeDAO getShoeDAO() {
         return shoeDAO;
     }
 

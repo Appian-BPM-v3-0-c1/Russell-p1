@@ -3,9 +3,8 @@ package com.revature.shoes.ui;
 import com.revature.shoes.models.Shoe;
 import com.revature.shoes.models.User;
 import com.revature.shoes.services.ShoeService;
-import com.revature.shoes.daos.ShoeDAO;
+
 import java.util.List;
-import java.util.Locale;
 import java.util.Scanner;
 
 public class ShoeMenu implements Imenu {
@@ -29,7 +28,7 @@ public class ShoeMenu implements Imenu {
             System.out.println("\n(1) Sneakers by Brand");
             System.out.println("(2) Sneakers by Size");
             System.out.println("(3) Add Shoe to Cart");
-            System.out.println("(4) Checkout");
+            System.out.println("(4) Order/Checkout Menu");
             System.out.println("(5) Leave Store");
 
             System.out.println("\nPlease make a selection:");
@@ -41,12 +40,13 @@ public class ShoeMenu implements Imenu {
                     searchByBrand();
                     break;
                 case '2':
-                    //searchByID();
+                    searchBySize();
                     break;
                 case '3':
                     break;
                 case '4':
-                    new OrderMenu().start();
+                    User user = null;
+                    new OrderMenu(user).start();
                     break;
                 case '5':
                     done = true;
@@ -76,7 +76,7 @@ public class ShoeMenu implements Imenu {
         }
     }
 
-    /*public void searchByID() {
+    public void searchBySize() {
         int id = 0;
         Scanner sc = new Scanner(System.in);
 
@@ -84,14 +84,16 @@ public class ShoeMenu implements Imenu {
             System.out.println("\nSearch by ID:  ");
             id = sc.nextInt();
 
-            List<Shoe> shoes = shoeService.getShoeDao().findByID(id);
-            if(shoes.isEmpty()) {
+            List<Shoe> shoes1 = shoeService.getShoeDAO().findBySize(id);
+            if(shoes1.isEmpty()) {
                 System.out.println("\nInvalid Size");
             } else {
-                for (Shoe sh : shoes) {
+                for (Shoe sh : shoes1) {
                     System.out.println(sh);
                 }
             }
         }
-    }*/
+    }
+
+
 }

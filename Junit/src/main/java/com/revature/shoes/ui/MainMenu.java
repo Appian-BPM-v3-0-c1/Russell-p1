@@ -1,6 +1,7 @@
 package com.revature.shoes.ui;
 
 import com.revature.shoes.daos.ShoeDAO;
+import com.revature.shoes.models.User;
 import com.revature.shoes.services.ShoeService;
 import com.revature.shoes.services.UserService;
 
@@ -43,7 +44,8 @@ public class MainMenu implements Imenu {
                     new AdminMenu(shoeService).start();
                     break;
                 case '4':
-                    new OrderMenu().start();
+                    User user = null;
+                    new OrderMenu(user).start();
                     break;
                 case '5':
                 done = true;

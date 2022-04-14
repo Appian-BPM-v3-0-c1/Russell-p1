@@ -146,7 +146,7 @@ public class LoginMenu implements Imenu {
                         createAccount();
                     }
                 } else {
-                    new OrderMenu().start();
+                    new OrderMenu(user).start();
                 }
             }
 

@@ -6,7 +6,9 @@ import com.revature.shoes.models.Shoe;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class CartDAO implements CrudDAO<Cart>{
@@ -31,7 +33,23 @@ public class CartDAO implements CrudDAO<Cart>{
 
     @Override
     public List<Cart> findAll() {
-        return null;
+        List<Cart> cartList = new ArrayList<>();
+
+        try {
+            PreparedStatement ps = con.prepareStatement("SELECT (id) FROM shoes");
+            ResultSet rs = ps.executeQuery();
+
+            while(rs.next()) {
+                Cart cart = new Cart();
+
+                cart.setShoe_id(rs.getInt("id"));
+                cart.setUser_id(rs.getInt("user_id"));
+                cart.setTotal_price(rs.getDouble("total_price"));
+            }
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+        return cartList;
     }
 
     @Override
