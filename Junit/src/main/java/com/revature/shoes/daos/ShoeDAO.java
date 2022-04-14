@@ -1,6 +1,7 @@
 package com.revature.shoes.daos;
 
 import com.revature.shoes.connection.DatabaseConnection;
+import com.revature.shoes.models.Cart;
 import com.revature.shoes.models.Shoe;
 
 import java.sql.Connection;
@@ -12,6 +13,7 @@ import java.util.List;
 
 public class ShoeDAO implements CrudDAO<Shoe>{
     Connection con = DatabaseConnection.getCon();
+
 
     @Override
     public void save(Shoe obj) {

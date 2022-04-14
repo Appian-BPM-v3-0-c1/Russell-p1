@@ -2,6 +2,7 @@ package com.revature.shoes.daos;
 
 
 import com.revature.shoes.connection.DatabaseConnection;
+import com.revature.shoes.models.Cart;
 import com.revature.shoes.models.Shoe;
 import com.revature.shoes.models.User;
 

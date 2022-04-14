@@ -17,13 +17,13 @@ public class CartDAO implements CrudDAO<Cart>{
     @Override
     public void save(Cart obj) {
         try{
-            PreparedStatement ps = con.prepareStatement("Insert into shoes (cart_id, shoe_id, user_id," +
-                    " total_price) VALUES (?,?,?,?)");
+            PreparedStatement ps = con.prepareStatement("Insert into shoes (shoe_id, user_id," +
+                    " inventory_id) VALUES (?,?,?)");
 
-            ps.setInt(1, obj.getCart_id());
-            ps.setInt(2, obj.getShoe_id());
-            ps.setInt(3, obj.getUser_id());
-            ps.setDouble(4, obj.getTotal_price());
+
+            ps.setInt(1, obj.getShoe_id());
+            ps.setInt(2, obj.getUser_id());
+            ps.setInt(3, obj.getInventory_id());
 
             ps.executeUpdate();
         } catch (SQLException e) {
@@ -41,10 +41,10 @@ public class CartDAO implements CrudDAO<Cart>{
 
             while(rs.next()) {
                 Cart cart = new Cart();
-
-                cart.setShoe_id(rs.getInt("id"));
+                cart.setId(rs.getInt("id"));
+                cart.setShoe_id(rs.getInt("shoe_id"));
                 cart.setUser_id(rs.getInt("user_id"));
-                cart.setTotal_price(rs.getDouble("total_price"));
+                cart.setInventory_id(rs.getInt("inventory_id"));
             }
         } catch (SQLException e){
             e.printStackTrace();
@@ -71,4 +71,6 @@ public class CartDAO implements CrudDAO<Cart>{
     public boolean removeById(String id) {
         return false;
     }
+
+
 }

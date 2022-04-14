@@ -1,20 +1,21 @@
 package com.revature.shoes.models;
 
-public class Cart {
+public class History {
     private int id;
     private int shoe_id;
     private int user_id;
-    private int inventory_id;
+    private int cart_id;
+    private String location;
 
-    public Cart() {
-
+    public History() {
     }
 
-    public Cart(int id, int shoe_id, int user_id, int inventory_id) {
+    public History(int id, int shoe_id, int user_id, int cart_id, String location) {
         this.id = id;
         this.shoe_id = shoe_id;
         this.user_id = user_id;
-        this.inventory_id = inventory_id;
+        this.cart_id = cart_id;
+        this.location = location;
     }
 
     public int getId() {
@@ -41,12 +42,20 @@ public class Cart {
         this.user_id = user_id;
     }
 
-    public int getInventory_id() {
-        return inventory_id;
+    public int getCart_id() {
+        return cart_id;
     }
 
-    public void setInventory_id(int inventory_id) {
-        this.inventory_id = inventory_id;
+    public void setCart_id(int cart_id) {
+        this.cart_id = cart_id;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
     }
 
     @Override
@@ -55,6 +64,7 @@ public class Cart {
                 "id=" + id +
                 ", shoe_id=" + shoe_id +
                 ", user_id=" + user_id +
-                ", inventory_id=" + inventory_id;
+                ", cart_id=" + cart_id +
+                ", location='" + location;
     }
 }

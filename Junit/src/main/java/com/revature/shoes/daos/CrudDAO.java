@@ -1,5 +1,6 @@
 package com.revature.shoes.daos;
 
+import com.revature.shoes.models.Cart;
 import com.revature.shoes.models.Shoe;
 
 import java.util.List;
@@ -18,4 +19,8 @@ public interface CrudDAO <T> {
     boolean update(T updateObj);
 
     boolean removeById(String id);
+
+    boolean removeByID(int id);
+
+
 }

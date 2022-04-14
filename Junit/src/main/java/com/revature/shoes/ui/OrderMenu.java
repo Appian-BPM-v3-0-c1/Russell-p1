@@ -1,9 +1,12 @@
 package com.revature.shoes.ui;
 
+import com.revature.shoes.daos.HistoryDAO;
 import com.revature.shoes.models.Cart;
+import com.revature.shoes.models.History;
 import com.revature.shoes.models.Shoe;
 import com.revature.shoes.models.User;
 import com.revature.shoes.services.CartService;
+import com.revature.shoes.services.HistoryService;
 import com.revature.shoes.services.ShoeService;
 
 import java.util.List;
@@ -46,10 +49,10 @@ public class OrderMenu implements Imenu {
                     showItems();
                     break;
                 case '2':
-                    //viewHistory();
+                    viewHistory();
                     break;
                 case '3':
-                    //viewCart();
+                    viewCart();
                     break;
                 case '4':
                     ShoeService shoeService = null;
@@ -91,11 +94,11 @@ public class OrderMenu implements Imenu {
 
                 if (sc.nextLine().charAt(0) == 'y') {
                     if (thisShoe.getQty() < 0) {
-                        Cart newCart = new Cart();
-                        newCart.setShoe_id(thisShoe.getId());
-                        newCart.setUser_id(user.getId());
-                        newCart.setTotal_price(thisShoe.getPrice());
-                        cartService.getCartDao().save(newCart);
+                        Cart cart = new Cart();
+                        cart.setShoe_id(thisShoe.getId());
+                        cart.setUser_id(user.getId());
+                        cart.setInventory_id(thisShoe.getId());
+                        cartService.getCartDao().save(cart);
 
                         System.out.println("Item added to Cart");
                         break;
@@ -117,7 +120,49 @@ public class OrderMenu implements Imenu {
         }
     }
 
-    /*private void viewHistory() {
-        List<History> historyList = historyService.getHistoryDAO
-    }*/
+    private void viewHistory() {
+        List<History> historyList = HistoryService.getHistoryDAO().findAll();
+
+        for(History h : historyList) {
+            System.out.println(ShoeService.getShoeDAO().findByID(h.getId()));
+        }
+    }
+
+    private void viewCart() {
+        List<Cart> carts = (List<Cart>) CartService.getCartDAO().findByID(user.getId());
+
+
+        while(true) {
+            for(Cart c : carts) {
+                System.out.println(ShoeService.getShoeDAO().findByID(c.getId()));
+            }
+
+            System.out.println("Checkout??");
+
+            if(sc.nextLine().charAt(0) == 'y') {
+                checkOut( carts);
+                break;
+            }
+        }
+    }
+
+    private void checkOut(List<Cart> carts) {
+        History history = new History();
+
+        for(Cart c : carts) {
+            history.setShoe_id(c.getShoe_id());
+            history.setUser_id(c.getUser_id());
+            history.setCart_id(c.getId());
+
+            HistoryService.getHistoryDAO().save(history);
+
+            ShoeService.getShoeDAO().removeByID(c.getUser_id());
+
+        }
+        System.out.println("Enjoy your Kick's....Checkout Complete");
+
+        for (Cart c : carts) {
+            CartService.getCartDAO().removeByID(c.getUser_id());
+        }
+    }
 }
