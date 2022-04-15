@@ -1,8 +1,8 @@
 package com.revature.shoes.ui;
 
 
-
 import com.revature.shoes.models.User;
+
 import com.revature.shoes.services.UserService;
 
 import java.util.Scanner;
@@ -41,6 +41,7 @@ public class LoginMenu implements Imenu {
                     createAccount();
                     break;
                 case '3':
+                    new OrderMenu(user).start();
                     break;
                 case '4':
                     done = true;
@@ -51,6 +52,7 @@ public class LoginMenu implements Imenu {
             }
         }
     }
+    //Create User Account
     private void createAccount() {
         String userName = " ";
         String password = " ";
@@ -122,10 +124,6 @@ public class LoginMenu implements Imenu {
                 System.out.println("Enter your Zip Code");
                 user.setZipCode(sc.nextInt());
 
-                System.out.println("Enter your Favorite Brand");
-                user.setFavBrand(sc.next());
-
-
                 System.out.println(user);
 
                 System.out.println("\nIs your information correct??");
@@ -141,12 +139,14 @@ public class LoginMenu implements Imenu {
                         userService.getUserDao().save(user);
 
                         System.out.println("User created successfully");
+                        new OrderMenu(user).start();
                         break;
+
                     } else {
                         createAccount();
                     }
                 } else {
-                    new OrderMenu(user).start();
+
                 }
             }
 
@@ -165,7 +165,7 @@ public class LoginMenu implements Imenu {
 
             if (userService.isValidLogin(user)) {
                 user.setId(userService.getUserDao().getId(user.getUserName()));
-                new MainMenu(userService).start();
+                new MainMenu(user).start();
                 break;
             } else {
                 System.out.println("\nLogin Not Accepted");

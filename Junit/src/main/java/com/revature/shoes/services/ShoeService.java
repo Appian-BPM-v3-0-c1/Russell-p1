@@ -1,21 +1,23 @@
 package com.revature.shoes.services;
 
-import com.revature.shoes.daos.CrudDAO;
+
 import com.revature.shoes.daos.ShoeDAO;
-import com.revature.shoes.models.Shoe;
+
 
 import java.util.List;
 
 public class ShoeService {
-    static ShoeDAO shoeDAO = new ShoeDAO();
+  private final ShoeDAO shoeDAO;
 
     public ShoeService(ShoeDAO shoeDAO) {
         this.shoeDAO = shoeDAO;
     }
 
-    public static ShoeDAO getShoeDAO() {
+
+    public ShoeDAO getShoeDAO() {
         return shoeDAO;
     }
+
 
     public boolean isDuplicate(String shoe_name) {
         List<String> shoe_name_list = shoeDAO.findAllShoes();
@@ -29,7 +31,5 @@ public class ShoeService {
     }
 
 
-    public CrudDAO<Shoe> getShoeDao() {
-        return null;
-    }
+
 }

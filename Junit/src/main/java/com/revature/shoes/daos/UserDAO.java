@@ -2,7 +2,6 @@ package com.revature.shoes.daos;
 
 
 import com.revature.shoes.connection.DatabaseConnection;
-import com.revature.shoes.models.Cart;
 import com.revature.shoes.models.Shoe;
 import com.revature.shoes.models.User;
 
@@ -20,7 +19,7 @@ public class UserDAO implements CrudDAO<User>{
     public void save(User obj) {
         try {
             PreparedStatement ps = con.prepareStatement("INSERT INTO users ( user_name, password, " +
-                    "firstName, lastName, email, zipCode, fav_Brand )  VALUES (?,?,?,?,?,?,?)");
+                    "firstName, lastName, email, zipCode)  VALUES (?,?,?,?,?,?)");
 
             ps.setString(1, obj.getUserName());
             ps.setString(2, obj.getPassword());
@@ -28,7 +27,6 @@ public class UserDAO implements CrudDAO<User>{
             ps.setString(4, obj.getLastName());
             ps.setString(5, obj.getEmail());
             ps.setInt(6, obj.getZipCode());
-            ps.setString(7, obj.getFavBrand());
             ps.executeUpdate();
 
         } catch (SQLException e) {
@@ -57,7 +55,7 @@ public class UserDAO implements CrudDAO<User>{
                 user.setLastName(rs.getString("lastName"));
                 user.setEmail(rs.getString("email"));
                 user.setZipCode(rs.getInt("zipCode"));
-                user.setFavBrand(rs.getString("fav_brand"));
+
 
                 userList.add(user);
 
@@ -87,6 +85,13 @@ public class UserDAO implements CrudDAO<User>{
     public boolean removeById(String id) {
         return false;
     }
+
+    @Override
+    public boolean removeByID(int id) {
+        return false;
+    }
+
+
 
     public List<String> findAllUserNames() {
         List<String> username_list = new ArrayList<>();

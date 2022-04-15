@@ -1,6 +1,8 @@
 package com.revature.shoes.ui;
 
+import com.revature.shoes.daos.CartDAO;
 import com.revature.shoes.daos.HistoryDAO;
+import com.revature.shoes.daos.ShoeDAO;
 import com.revature.shoes.models.Cart;
 import com.revature.shoes.models.History;
 import com.revature.shoes.models.Shoe;
@@ -15,22 +17,19 @@ import java.util.Scanner;
 public class OrderMenu implements Imenu {
     private final User user;
 
-    Scanner sc = new Scanner(System.in);
-
-    private CartService cartService;
-
 
 
     public OrderMenu(User user) {
-
         this.user = user;
+
+
     }
 
     @Override
     public void start() {
         char input = ' ';
         boolean done = false;
-
+        Scanner sc = new Scanner(System.in);
 
         while (!done) {
             System.out.println("\nOrder/Checkout Menu");
@@ -55,8 +54,8 @@ public class OrderMenu implements Imenu {
                     viewCart();
                     break;
                 case '4':
-                    ShoeService shoeService = null;
-                    new ShoeMenu(shoeService).start();
+
+                    new ShoeMenu(new ShoeService(new ShoeDAO())).start();
                     break;
                 case '5':
                     done = true;
@@ -68,7 +67,9 @@ public class OrderMenu implements Imenu {
     }
 
     private void showItems() {
-        List<Shoe> shoeList = ShoeService.getShoeDAO().findAll();
+        ShoeService shoeService = new ShoeService(new ShoeDAO());
+        Scanner sc = new Scanner(System.in);
+        List<Shoe> shoeList = shoeService.getShoeDAO().findAll();
         for (Shoe i : shoeList) {
             System.out.println(i);
         }
@@ -83,12 +84,14 @@ public class OrderMenu implements Imenu {
     private void buyItems(List<Shoe> shoeList) {
         int input = 0;
         boolean tr = false;
+        Scanner sc = new Scanner(System.in);
+        CartService cartService = new CartService(new CartDAO());
 
         while (!tr) {
             System.out.println("What Shoe do you want, enter a number matching the ID");
             input = sc.nextInt();
 
-            if (input > shoeList.size()) {
+            if (input < shoeList.size()) {
                 Shoe thisShoe = shoeList.get(input);
                 System.out.println("add to your cart?");
 
@@ -98,11 +101,11 @@ public class OrderMenu implements Imenu {
                         cart.setShoe_id(thisShoe.getId());
                         cart.setUser_id(user.getId());
                         cart.setInventory_id(thisShoe.getId());
-                        cartService.getCartDao().save(cart);
+                        cartService.getCartDAO().save(cart);
 
                         System.out.println("Item added to Cart");
                         break;
-                    } else if (thisShoe.getQty() == 0) {
+                    } else if (thisShoe.getQty() >= 0) {
                         System.out.println("Item not in stock");
                         break;
                     } else if (sc.nextLine().charAt(0) == 'n') {
@@ -121,20 +124,28 @@ public class OrderMenu implements Imenu {
     }
 
     private void viewHistory() {
-        List<History> historyList = HistoryService.getHistoryDAO().findAll();
+        ShoeService shoeService = new ShoeService(new ShoeDAO());
+        HistoryService historyService = new HistoryService(new HistoryDAO());
+
+
+        List<History> historyList = historyService.getHistoryDAO().findAll();
 
         for(History h : historyList) {
-            System.out.println(ShoeService.getShoeDAO().findByID(h.getId()));
+            System.out.println(shoeService.getShoeDAO().findByID(h.getId()));
         }
     }
 
     private void viewCart() {
-        List<Cart> carts = (List<Cart>) CartService.getCartDAO().findByID(user.getId());
+        ShoeService shoeService = new ShoeService(new ShoeDAO());
+        CartService cartService = new CartService(new CartDAO());
+
+        Scanner sc = new Scanner(System.in);
+        List<Cart> carts = (List<Cart>) cartService.getCartDAO().findByID(user.getId());
 
 
         while(true) {
             for(Cart c : carts) {
-                System.out.println(ShoeService.getShoeDAO().findByID(c.getId()));
+                System.out.println(shoeService.getShoeDAO().findByID(c.getId()));
             }
 
             System.out.println("Checkout??");
@@ -148,21 +159,24 @@ public class OrderMenu implements Imenu {
 
     private void checkOut(List<Cart> carts) {
         History history = new History();
+        HistoryService historyService = new HistoryService(new HistoryDAO());
+        ShoeService shoeService = new ShoeService(new ShoeDAO());
+        CartService cartService = new CartService(new CartDAO());
 
         for(Cart c : carts) {
             history.setShoe_id(c.getShoe_id());
             history.setUser_id(c.getUser_id());
             history.setCart_id(c.getId());
 
-            HistoryService.getHistoryDAO().save(history);
+            historyService.getHistoryDAO().save(history);
 
-            ShoeService.getShoeDAO().removeByID(c.getUser_id());
+            shoeService.getShoeDAO().removeByID(c.getUser_id());
 
         }
         System.out.println("Enjoy your Kick's....Checkout Complete");
 
         for (Cart c : carts) {
-            CartService.getCartDAO().removeByID(c.getUser_id());
+            cartService.getCartDAO().removeByID(c.getUser_id());
         }
     }
 }

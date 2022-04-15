@@ -11,6 +11,7 @@ public class ShoeMenu implements Imenu {
     private final ShoeService shoeService;
 
 
+
     public ShoeMenu(ShoeService shoeService) {
         this.shoeService = shoeService;
 
@@ -45,7 +46,7 @@ public class ShoeMenu implements Imenu {
                 case '3':
                     break;
                 case '4':
-                    User user = null;
+                    User user = new User();
                     new OrderMenu(user).start();
                     break;
                 case '5':
@@ -56,6 +57,7 @@ public class ShoeMenu implements Imenu {
             }
         }
     }
+    //Searches Shoe Inventory by Brand
     public void searchByBrand() {
         String brand = " ";
         Scanner sc = new Scanner(System.in);
@@ -64,7 +66,7 @@ public class ShoeMenu implements Imenu {
             System.out.println("\nSearch by Brand:  ");
             brand = sc.nextLine().toLowerCase();
 
-            List<Shoe> shoes = shoeService.getShoeDAO().findByBrand(brand);
+            List<Shoe> shoes =shoeService.getShoeDAO().findByBrand(brand);
 
             if (shoes.isEmpty()) {
                 System.out.println("\nInvalid Brand");
@@ -75,7 +77,7 @@ public class ShoeMenu implements Imenu {
             }
         }
     }
-
+    //Search by Shoe Size by Brand
     public void searchBySize() {
         int id = 0;
         Scanner sc = new Scanner(System.in);

@@ -7,21 +7,19 @@ public class User {
     private String email;
     private int zipCode;
     private int shoeSize;
-    private String favBrand;
     private String userName;
     private String password;
 
     public User() {
     }
 
-    public User(int id, String firstName, String lastName, String email, int zipCode, int shoeSize, String favBrand, String userName, String password) {
+    public User(int id, String firstName, String lastName, String email, int zipCode, int shoeSize, String userName, String password) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.zipCode = zipCode;
         this.shoeSize = shoeSize;
-        this.favBrand = favBrand;
         this.userName = userName;
         this.password = password;
     }
@@ -74,14 +72,6 @@ public class User {
         this.shoeSize = shoeSize;
     }
 
-    public String getFavBrand() {
-        return favBrand;
-    }
-
-    public void setFavBrand(String favBrand) {
-        this.favBrand = favBrand;
-    }
-
     public String getUserName() {
         return userName;
     }
@@ -100,16 +90,13 @@ public class User {
 
     @Override
     public String toString() {
-        return "User{" +
-                "id=" + id +
+        return
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
                 ", zipCode=" + zipCode +
                 ", shoeSize=" + shoeSize +
-                ", favBrand='" + favBrand + '\'' +
                 ", userName='" + userName + '\'' +
-                ", password='" + password + '\'' +
-                '}';
+                ", password='" + password;
     }
 }

@@ -32,6 +32,7 @@ public class HistoryDAO implements CrudDAO<History> {
     }
 
     @Override
+    //Find All Order Histories
     public List<History> findAll() {
         List<History> historyList = new ArrayList<>();
 
@@ -74,6 +75,21 @@ public class HistoryDAO implements CrudDAO<History> {
     @Override
     public boolean removeById(String id) {
         return false;
+    }
+
+    @Override
+    public boolean removeByID(int id) {
+        return false;
+    }
+
+
+    public List<History> findByBrand(String brand) {
+        return null;
+    }
+
+
+    public List<History> findBySize(int id) {
+        return null;
     }
 
 

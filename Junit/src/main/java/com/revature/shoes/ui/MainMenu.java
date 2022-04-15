@@ -1,15 +1,22 @@
 package com.revature.shoes.ui;
 
+
 import com.revature.shoes.daos.ShoeDAO;
+import com.revature.shoes.daos.UserDAO;
 import com.revature.shoes.models.User;
+
+
 import com.revature.shoes.services.ShoeService;
 import com.revature.shoes.services.UserService;
+
 
 import java.util.Scanner;
 
 public class MainMenu implements Imenu {
+    private final User user;
 
-    public MainMenu(UserService userService) {
+    public MainMenu(User user) {
+        this.user = user;
     }
 
     @Override
@@ -23,9 +30,10 @@ public class MainMenu implements Imenu {
             System.out.println("\nSneakers, Kicks, and Nike's");
             System.out.println("\n(1) Buy some Kick's");
             System.out.println("(2) Search Sneakers");
-            System.out.println("(3) User Support");
-            System.out.println("(4) Checkout");
-            System.out.println("(5) Leave Store");
+            System.out.println("(3) Login Menu");
+            System.out.println("(4) Order/Checkout Menu");
+            System.out.println("(5) Admin Menu");
+            System.out.println("(6) Leave Store");
 
             System.out.println("\nPlease make a selection:");
 
@@ -40,14 +48,16 @@ public class MainMenu implements Imenu {
                     new ShoeDAO().findAllShoes();
                     break;
                 case '3':
-                    ShoeService shoeService = null;
-                    new AdminMenu(shoeService).start();
+
+                    new LoginMenu(new UserService(new UserDAO())).start();
                     break;
                 case '4':
-                    User user = null;
+                    ShoeDAO shoeDAO = new ShoeDAO();
                     new OrderMenu(user).start();
                     break;
                 case '5':
+                    new AdminMenu(new ShoeService(new ShoeDAO()),user).start();
+                case '6':
                 done = true;
                     break;
                 default:

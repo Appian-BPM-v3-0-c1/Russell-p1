@@ -1,7 +1,6 @@
 package com.revature.shoes.daos;
 
 import com.revature.shoes.connection.DatabaseConnection;
-import com.revature.shoes.models.Cart;
 import com.revature.shoes.models.Location;
 import com.revature.shoes.models.Shoe;
 
@@ -14,10 +13,11 @@ import java.util.List;
 
 public class LocationDAO implements CrudDAO<Location> {
     Connection con =  DatabaseConnection.getCon();
+
     @Override
     public void save(Location obj) {
         try{
-            PreparedStatement ps = con.prepareStatement("Insert into shoes (location, shoe_name," +
+            PreparedStatement ps = con.prepareStatement("Insert into locations (location, shoe_name," +
                     " inventory_qty) VALUES (?,?,?)");
 
 
@@ -71,6 +71,13 @@ public class LocationDAO implements CrudDAO<Location> {
     public boolean removeById(String id) {
         return false;
     }
+
+    @Override
+    public boolean removeByID(int id) {
+        return false;
+    }
+
+
 
 
 }

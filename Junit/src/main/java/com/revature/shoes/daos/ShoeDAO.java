@@ -1,7 +1,6 @@
 package com.revature.shoes.daos;
 
 import com.revature.shoes.connection.DatabaseConnection;
-import com.revature.shoes.models.Cart;
 import com.revature.shoes.models.Shoe;
 
 import java.sql.Connection;
@@ -45,7 +44,7 @@ public class ShoeDAO implements CrudDAO<Shoe>{
             while(rs.next()) {
                 Shoe shoe = new Shoe();
 
-                shoe.setId(rs.getInt("shoe_id"));
+                shoe.setBrand(rs.getString("id"));
                 shoe.setBrand(rs.getString("shoe_brand"));
                 shoe.setName(rs.getString("shoe_name"));
                 shoe.setType(rs.getString("shoe_type"));
@@ -81,11 +80,16 @@ public class ShoeDAO implements CrudDAO<Shoe>{
         return false;
     }
 
+    @Override
+    public boolean removeByID(int id) {
+        return false;
+    }
+
     public List<String> findAllShoes() {
         List<String> shoe_name_list = new ArrayList<>();
 
         try {
-            PreparedStatement ps = con.prepareStatement("SELECT (shoe_name) From shoes");
+            PreparedStatement ps = con.prepareStatement("SELECT * From shoes");
             ResultSet rs = ps.executeQuery();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -117,7 +121,7 @@ public class ShoeDAO implements CrudDAO<Shoe>{
         } catch (SQLException e){
             e.printStackTrace();
         }
-        return shoes;
+        return  shoes;
     }
 
     public List<Shoe> findBySize(int size) {

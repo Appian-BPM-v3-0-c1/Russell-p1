@@ -17,7 +17,7 @@ public class CartDAO implements CrudDAO<Cart>{
     @Override
     public void save(Cart obj) {
         try{
-            PreparedStatement ps = con.prepareStatement("Insert into shoes (shoe_id, user_id," +
+            PreparedStatement ps = con.prepareStatement("Insert into carts (shoe_id, user_id," +
                     " inventory_id) VALUES (?,?,?)");
 
 
@@ -36,7 +36,7 @@ public class CartDAO implements CrudDAO<Cart>{
         List<Cart> cartList = new ArrayList<>();
 
         try {
-            PreparedStatement ps = con.prepareStatement("SELECT (id) FROM shoes");
+            PreparedStatement ps = con.prepareStatement("SELECT (id) FROM carts");
             ResultSet rs = ps.executeQuery();
 
             while(rs.next()) {
@@ -70,6 +70,21 @@ public class CartDAO implements CrudDAO<Cart>{
     @Override
     public boolean removeById(String id) {
         return false;
+    }
+
+    @Override
+    public boolean removeByID(int id) {
+        return false;
+    }
+
+
+    private  List<Cart> findByBrand(String brand) {
+        return null;
+    }
+
+
+    private List<Cart> findBySize(int id) {
+        return null;
     }
 
 
